@@ -1,0 +1,42 @@
+if (count === 0) {
+                            this.disabled = true;
+                        }
+                        
+                        // Enable all buy buttons that are now affordable
+                        buyButtons.forEach(btn => {
+                            const btnPrice = parseInt(btn.dataset.price);
+                            if (money >= btnPrice) {
+                                btn.disabled = false;
+                            }
+                        });
+                        
+                        // Add animation to the item
+                        this.closest('.item').classList.add('jump');
+                        setTimeout(() => {
+                            this.closest('.item').classList.remove('jump');
+                        }, 500);
+                    }
+                });
+            });
+            
+            // Scroll animation for fade-in elements
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        fadeInObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeElements.forEach(element => {
+                fadeInObserver.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
